@@ -9,7 +9,7 @@ const { fetch } = require('cross-fetch');
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
-
+let mainWindow;
 const createWindow = async () => {
 
   // AdBlocker
@@ -20,10 +20,9 @@ const createWindow = async () => {
   
   
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+   mainWindow = new BrowserWindow({
     width: 1300,
     height: 800,
-    title:"YouTube Music",
     autoHideMenuBar: true ,
   });
 
@@ -59,3 +58,84 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+// RPC client ID
+const clientId = '817058778628751370';
+// DiscordRPC Package
+const DiscordRPC = require('discord-rpc');
+DiscordRPC.register(clientId);
+
+const rpc = new DiscordRPC.Client({
+  transport: 'ipc'
+});
+
+let startTimestamp = new Date();
+let prevInfo = '';
+let prevArgs = [];
+
+function setActivity() {
+  if (!rpc || !mainWindow) {
+    return;
+}
+  let currentURL = mainWindow.webContents.getURL();
+  let args = mainWindow.getTitle().split(' - ');
+  let songinfo = mainWindow.getTitle().replace(/ - YouTube Music/, '').replace(/YouTube Music/, '');
+  let smallImage = 'play';
+  let details = songinfo;
+  let state = 'State: Listening';
+  let smallImageText = 'Listening';
+
+  if (prevInfo !== mainWindow.getTitle()) {
+    prevInfo = mainWindow.getTitle();
+
+    if (args.length > 1) {
+      prevArgs = songinfo;
+      startTimestamp = new Date(); 
+    }
+  }
+
+  if (args.length < 2) {
+      smallImage = 'pause';
+      smallImageText = 'Paused';
+      details = 'unknown';
+      state = 'State: Paused';
+      buttons = [{
+        label: "Download app 💻",
+        url: `https://github.com/`,
+      }]
+  }
+
+  if (args.length > 2) {
+    buttons = [{
+      label: "Listen to song 🎶",
+      url: `${currentURL}`,
+    },{
+      label: "Download app 💻",
+      url: `https://github.com/`,
+    }]
+  }
+
+  rpc.setActivity({
+      details: details,
+      buttons: buttons,
+      startTimestamp: startTimestamp,
+      state: state,
+      largeImageKey: 'youtubemusic_logo',
+      largeImageText: 'YouTube Music',
+      smallImageKey: smallImage,
+      smallImageText: smallImageText,
+      instance: false,
+  });
+}
+
+rpc.on('ready', () => {
+  setActivity();
+  // activity can only be set every 15 seconds
+  setInterval(() => {
+      setActivity();
+  }, 15000);
+});
+
+rpc.login({
+  clientId
+}).catch(console.error);
