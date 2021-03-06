@@ -19,17 +19,15 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "publishers": [
-        {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "me",
-              "name": "youtube_music"
-            }
+      
+        "name": "@electron-forge/publisher-github",
+        "config": {
+          "repository": {
+            "owner": "me",
+            "name": "youtube_music"
           }
-        }
-      ],
+        },
+      
       "packagerConfig": {
         "icon": "./ico/icon.ico"
       },
