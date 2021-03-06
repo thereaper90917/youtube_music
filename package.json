@@ -19,6 +19,18 @@
   "license": "MIT",
   "config": {
     "forge": {
+
+      "publishers":
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "me",
+              "name": "youtube_music"
+            }
+          }
+        }
+      ,
       "packagerConfig": {
         "icon": "./ico/icon.ico"
       },
@@ -46,18 +58,8 @@
           "name": "@electron-forge/maker-rpm",
           "config": {}
         }
-      ],
-      "publishers": [
-        {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "me",
-              "name": "youtube_music"
-            }
-          }
-        }
       ]
+     
     }
   },
   "dependencies": {
