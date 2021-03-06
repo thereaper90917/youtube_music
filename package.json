@@ -52,8 +52,8 @@
           "name": "@electron-forge/publisher-github",
           "config": {
             "repository": {
-              "owner": "erikhofer",
-              "name": "electron-publish-example",
+              "owner": "me",
+              "name": "youtube_music",
               "draft": true
             }
           }
