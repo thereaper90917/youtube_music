@@ -52,7 +52,7 @@
           "name": "@electron-forge/publisher-github",
           "config": {
             "repository": {
-              "owner": "me",
+              "owner": "thereaper90917",
               "name": "youtube_music"
             }
           }
