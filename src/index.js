@@ -45,7 +45,8 @@ const createWindow = async () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', ()=>{
   require('update-electron-app')({
-    repo: 'https://github.com/thereaper90917/youtube_music',
+    host: "https://github.com/",
+    repo: 'thereaper90917/youtube_music',
     updateInterval: '1 hour',
     logger: require('electron-log')
   })
