@@ -1,6 +1,8 @@
 const { app, BrowserWindow, session } = require('electron');
 const path = require('path');
 
+
+
 // Third Party Packages
 const { ElectronBlocker, fullLists} = require('@cliqz/adblocker-electron');
 const { fetch } = require('cross-fetch');
@@ -24,8 +26,12 @@ const createWindow = async () => {
     width: 1300,
     height: 800,
     autoHideMenuBar: true ,
+    webPreferences:{
+      nodeIntegration:true,
+      enableRemoteModule:true,
+      devTools: false 
+    }
   });
-
   // and load the index.html of the app.
   mainWindow.loadURL('https://music.youtube.com/',
   {userAgent: "Safari/605.1.15"})
@@ -37,7 +43,14 @@ const createWindow = async () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', ()=>{
+  const updateApp = require('update-electron-app')
+  updateApp({
+    updateInterval: '1 hour',
+    notifyUser:true
+  })
+  createWindow()
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
