@@ -44,10 +44,10 @@ const createWindow = async () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', ()=>{
-  const updateApp = require('update-electron-app')
-  updateApp({
+  require('update-electron-app')({
+    repo: 'https://github.com/thereaper90917/youtube_music',
     updateInterval: '1 hour',
-    notifyUser:true
+    logger: require('electron-log')
   })
   createWindow()
 });
