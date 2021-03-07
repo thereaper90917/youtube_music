@@ -1,7 +1,7 @@
 {
   "name": "youtube-music",
   "productName": "youtube-music",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "My Electron application description",
   "repository": "https://github.com/thereaper90917/youtube_music",
   "main": "src/index.js",
