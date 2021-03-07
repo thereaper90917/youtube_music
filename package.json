@@ -54,7 +54,7 @@
             "repository": {
               "owner": "thereaper90917",
               "name": "youtube_music",
-              "draft": false
+              "draft": true
             }
           }
         }
