@@ -1,18 +1,12 @@
-const { app, BrowserWindow, session } = require('electron');
+const { app, BrowserWindow, session} = require('electron');
 const path = require('path');
 
 
-
-const uaup = require('uaup-js');
-
-const updateOptions = {
-  gitRepo: "youtube_music", // [Required] Your Repo Name
-  gitUsername: "thereaper90917",  // [Required] Your GitHub Username.
-  appName: "youtube_music", //[Required] The Name of the app archive and the app folder.
-  appExecutableName: "youtube-music.exe", //[Required] The Executable of the Application to be Run after updating.
- 
-};
-
+require('update-electron-app')({
+  repo: 'thereaper90917/youtube_music',
+  updateInterval: '1 hour',
+  logger: require('electron-log')
+})
 
 // Third Party Packages
 const { ElectronBlocker, fullLists} = require('@cliqz/adblocker-electron');
@@ -42,6 +36,7 @@ const createWindow = async () => {
       enableRemoteModule:true,
     }
   });
+ 
   // and load the index.html of the app.
   mainWindow.loadURL('https://music.youtube.com/',
   {userAgent: "Safari/605.1.15"})
@@ -54,10 +49,6 @@ const createWindow = async () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready',()=>{
-  let isUpdateAvalible = uaup.CheckForUpdates(updateOptions);
-  if(isUpdateAvalible){
-    console.log("yes update there")
-  }
   createWindow()
 });
 

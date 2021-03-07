@@ -1,7 +1,7 @@
 {
   "name": "youtube-music",
   "productName": "youtube-music",
-  "version": "0.0.8",
+  "version": "0.0.1",
   "description": "My Electron application description",
   "repository": "https://github.com/thereaper90917/youtube_music",
   "main": "src/index.js",
@@ -69,7 +69,6 @@
     "electron-log": "^4.3.2",
     "electron-squirrel-startup": "^1.0.0",
     "node-fetch": "^2.6.1",
-    "uaup-js": "0.0.22",
     "update-electron-app": "^2.0.1"
   },
   "devDependencies": {
