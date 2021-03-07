@@ -53,7 +53,8 @@
           "config": {
             "repository": {
               "owner": "thereaper90917",
-              "name": "youtube_music"
+              "name": "youtube_music",
+              "draft": false
             }
           }
         }
