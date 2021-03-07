@@ -36,14 +36,22 @@ const createWindow = async () => {
       enableRemoteModule:true,
     }
   });
- 
+  
   // and load the index.html of the app.
   mainWindow.loadURL('https://music.youtube.com/',
   {userAgent: "Safari/605.1.15"})
+  
+  
 
+  // Fix For when you play music and try to close
+  mainWindow.on('close', function(e) { 
+    e.preventDefault();
+    mainWindow.destroy();
+    });
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 };
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -57,6 +65,7 @@ app.on('ready',()=>{
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
+    console.log('closing')
     app.quit();
   }
 });
