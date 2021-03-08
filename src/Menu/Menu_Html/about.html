@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+</head>
+<body>
+    <section class="section is-flex is-flex-direction-column is-justify-content-center is-align-items-center " style="width: 100%; height: 100%;">
+        <h2 class="subtitle">
+          <img src="../../../ico/icon.ico" alt="Icon" style="width: 200px; height: auto;">
+        </h2>
+        <h1 class="title has-text-white">Youtube Music</h1>
+        <h2 class="title has-text-white" id="version"></h2>
+      </section>
+      
+
+
+
+
+
+<script >
+    const { ipcRenderer } = require('electron')
+    
+    ipcRenderer.on('version', (e,data)=>{
+        document.getElementById('version').innerHTML  = `V${data}` ;
+    })
+    // console.log(appVersion)
+    // document.getElementById('test').textContent  = appVersion ;
+</script>
+<link rel="stylesheet" href="../Menu_css/bulma/bulma.min.css">
+<link rel="stylesheet" href="../Menu_css/about.css">
+</body>
+</html>

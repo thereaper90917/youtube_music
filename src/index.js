@@ -1,8 +1,10 @@
-const { app, BrowserWindow, session} = require('electron');
+const { app, BrowserWindow, session, Menu,} = require('electron');
 const path = require('path');
+const {newWindow} = require('./Menu/Menu_JS//about')
 
 
-require('update-electron-app')({
+
+require('update-electron-app-notification')({
   repo: 'thereaper90917/youtube_music',
   updateInterval: '1 hour',
   logger: require('electron-log')
@@ -30,10 +32,11 @@ const createWindow = async () => {
    mainWindow = new BrowserWindow({
     width: 1310,
     height: 800,
-    autoHideMenuBar: true ,
-    webPreferences:{
-      nodeIntegration:true,
-      enableRemoteModule:true,
+    // autoHideMenuBar: true ,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      
     }
   });
   
@@ -58,6 +61,31 @@ const createWindow = async () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready',()=>{
   createWindow()
+
+  // Menu for App
+  const template = [
+    {
+      label:  'Settings',
+      submenu:[
+        // {
+        //   // TODO still have to add functionality
+        //   label:
+        //   'User Settings',
+        // },
+          {
+          label:
+          'About',
+          click: ()=>{
+            newWindow()
+          }
+        }
+      ]
+    }
+  ]
+  
+  
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -65,7 +93,6 @@ app.on('ready',()=>{
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    console.log('closing')
     app.quit();
   }
 });
@@ -81,10 +108,15 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
+
+
+
+
 // RPC client ID
 const clientId = '817058778628751370';
 // DiscordRPC Package
 const DiscordRPC = require('discord-rpc');
+const { electron } = require('process');
 DiscordRPC.register(clientId);
 
 const rpc = new DiscordRPC.Client({
@@ -123,17 +155,14 @@ function setActivity() {
       state = 'State: Paused';
       buttons = [{
         label: "Download app 💻",
-        url: `https://github.com/`,
+        url: `https://github.com/thereaper90917/youtube_music/releases`,
       }]
   }
 
   if (args.length > 2) {
     buttons = [{
-      label: "Listen to song 🎶",
-      url: `${currentURL}`,
-    },{
       label: "Download app 💻",
-      url: `https://github.com/`,
+      url: `https://github.com/thereaper90917/youtube_music/releases`,
     }]
   }
 
