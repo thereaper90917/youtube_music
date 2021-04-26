@@ -9,7 +9,7 @@ const elogger = require('electron-log')
 // setup for custom logs
 const log = require('electron-log');
 log.transports.file.level = 'error';
-log.transports.file.resolvePath = () => 'Errors.log';
+log.transports.file.resolvePath = () => 'ErrorsLog.log';
 
 
 
