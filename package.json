@@ -21,7 +21,8 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "icon": "./ico/icon.ico"
+        "icon": "./ico/icon.ico",
+        "asar": true
       },
       "makers": [
         {
@@ -41,7 +42,12 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "name": "youtube_music",
+            "loadingGif": "./ico/loading.gif",
+            "setupIcon": "./ico/icon.ico",
+            "iconUrl": "https://cdn0.iconfinder.com/data/icons/brands-colored-2/232/music-social-network-brand-logo-256.png"
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",
@@ -65,6 +71,7 @@
   "dependencies": {
     "@cliqz/adblocker-electron": "^1.20.3",
     "cross-fetch": "^3.0.6",
+    "custom-electron-titlebar": "^3.2.6",
     "discord-rpc": "^3.2.0",
     "electron-log": "^4.3.2",
     "electron-squirrel-startup": "^1.0.0",
